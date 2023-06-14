@@ -92,6 +92,30 @@ const TodoTemplate = () => {
 
   }
 
+  // 할 일 삭제 처리 함수
+  const removeTodo = id => {
+    // console.log(`삭제 대상 id : ${id}`);
+    /*
+    let idx;
+    for(let i=0; i<todos.length; i++) {
+      if(id === todos[i].id) {
+        idx = i;
+        break;
+      }
+    }
+
+    const copyTodos = [...todos];
+    copyTodos.splice(idx, 1);
+
+    setTodos(copyTodos);
+     */
+    
+    // ES6 문법부터 주어지는 배열 고차 함수 (map도 마찬가지)
+    // 주어진 배열의 값들을 순회하여 조건에 맞는 요소들만 모아서 새로운 배열로 리턴해 주는 함수.
+    // 콜백 함수를 매개값으로 받음.
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
   // todos 배열에 변화가 있을 때 재렌더링
   // 첫번째 매개변수 : 실행할 함수, 두번째 매개변수 : 변화를 감지할 값
   useEffect(() => {
@@ -102,7 +126,7 @@ const TodoTemplate = () => {
   return (
     <div className='TodoTemplate'>
         <TodoHeader />
-        <TodoMain todoList={todos}/>
+        <TodoMain todoList={todos} remove={removeTodo} />
         <TodoInput addTodo={addTodo} />
     </div>
   );

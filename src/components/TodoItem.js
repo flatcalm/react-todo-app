@@ -7,7 +7,7 @@ import './scss/TodoInput.scss'
 import './scss/TodoItem.scss'
 import classNames from 'classnames';
 
-const TodoItem = ({ item }) => {
+const TodoItem = ({ item, remove }) => {
 
   const {id, title, done} = item;
 
@@ -17,7 +17,7 @@ const TodoItem = ({ item }) => {
             {done && <MdDone />}
         </div>
         <span className={cn('text', {finish: done})}>{title}</span>
-        <div className='remove'>
+        <div className='remove' onClick={() => remove(id)}>
           <MdDelete />
         </div>
     </li>
