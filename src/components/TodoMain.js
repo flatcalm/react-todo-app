@@ -3,7 +3,7 @@ import TodoItem from './TodoItem';
 
 import './scss/TodoMain.scss'
 
-const TodoMain = ({ todoList, remove }) => {
+const TodoMain = ({ todoList, remove, check }) => {
   // console.log(todoList);
   
   return (
@@ -13,6 +13,7 @@ const TodoMain = ({ todoList, remove }) => {
                                           key={todo.id} 
                                           item={todo} 
                                           remove={remove} 
+                                          check={check} 
                                 />)
         }
     </ul>

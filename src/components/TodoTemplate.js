@@ -116,6 +116,29 @@ const TodoTemplate = () => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
+  // 할 일 체크 처리 함수
+  const checkTodo = id => {
+    // console.log(`체크한 Todo id :  ${id}`);
+    /*
+    const copyTodos = [...todos];
+    for(let cTodo of copyTodos) {
+      if(cTodo.id === id) {
+        cTodo.done = !cTodo.done;
+      }
+    }
+
+    setTodos(copyTodos);
+     */
+    
+    // 삼항 연산자의 결과 값도 리턴, map 함수의 결과값도 리턴
+    // 리턴 받은 새로운 값을 setTodos(useState)를 통해 값이 변경되었음을 알림
+    // todos가 useEffect로 관리되고 있기 때문에 setTodos를 통해 값이 변경됨을 감지하면 화면을 재렌더링
+    setTodos(todos.map(todo => todo.id === id ? {...todo, done: !todo.done} : todo));
+  }
+
+  // 체크가 안된 할 일의 개수 카운트하기
+  const countRestTodo = () => todos.filter(todo => !todo.done).length;
+
   // todos 배열에 변화가 있을 때 재렌더링
   // 첫번째 매개변수 : 실행할 함수, 두번째 매개변수 : 변화를 감지할 값
   useEffect(() => {
@@ -125,8 +148,12 @@ const TodoTemplate = () => {
 
   return (
     <div className='TodoTemplate'>
-        <TodoHeader />
-        <TodoMain todoList={todos} remove={removeTodo} />
+        <TodoHeader count={countRestTodo} />
+        <TodoMain 
+          todoList={todos} 
+          remove={removeTodo} 
+          check={checkTodo} 
+        />
         <TodoInput addTodo={addTodo} />
     </div>
   );
