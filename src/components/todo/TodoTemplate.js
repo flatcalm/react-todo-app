@@ -210,7 +210,7 @@ const TodoTemplate = () => {
         // console.log(json.todos);
 
         // fetch를 통해 받아온 데이터를 상태 변수에 할당.
-        setTodos(json.todos);
+        if(json) setTodos(json.todos);
 
         // 로딩 완료 처리
         setLoading(false);
